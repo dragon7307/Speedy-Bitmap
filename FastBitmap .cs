@@ -11,20 +11,20 @@ namespace Speedy_Bitmap;
     public unsafe class FastBitmap 
     {
 
-
+    
 
         int _width;
 
         int _height;
 
 
-        public Bitmap bmp { get; internal set;   }   
+        public Bitmap bmp { get; internal set; }   
 
 
 
 
         byte* cur;
-        BitmapData ?  dat;
+        BitmapData?  dat;
 
         public int   Width 
         {
@@ -44,9 +44,7 @@ namespace Speedy_Bitmap;
             get
             {
 
-
                 GraphicsUnit  pixel  = GraphicsUnit.Pixel;
-
                 RectangleF rect = bmp.GetBounds(ref  pixel  );
                 return new Point((int)rect.X, (int)rect.Y);
             }
@@ -58,15 +56,9 @@ namespace Speedy_Bitmap;
         {
             get
             {
-
-
-            
-
                 GraphicsUnit pixel  = GraphicsUnit.Pixel;
-
                 RectangleF rect = bmp.GetBounds(ref pixel);
                 return new Rectangle((int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height);
-
             }
         }
         public int   Height 
@@ -87,44 +79,36 @@ namespace Speedy_Bitmap;
 
     public void MakeTransparent() =>  bmp.MakeTransparent();
 
-      public void MakeTransparent(   Color    col  ) => bmp.MakeTransparent(   col   );
+    public void MakeTransparent(   Color    col  ) => bmp.MakeTransparent(   col   );
 
     public   float  Horizontalresolution => bmp.HorizontalResolution;   
      
     public   float     Verticalresolution => bmp. VerticalResolution ;
 
-     public void Lock()
+    public void Lock()
+    {
+        _width = Border.Width * sizeof(pixel);
+        if (_width % 4 != 0)
         {
+           _width = 4 * (_width / 4 + 1);
+        } 
+         dat = bmp.LockBits(Border, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+        cur = (byte*)dat.Scan0.ToPointer();
+    }
 
 
-            _width = Border.Width * sizeof(pixel);
-
-            if (_width % 4 != 0)
-            {
-                _width = 4 * (_width / 4 + 1);
-            }
-            dat = bmp.LockBits(Border, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            cur = (byte*)dat.Scan0.ToPointer();
-        }
-
-
-        public void Unlock()
-        {
-
-
-            bmp.UnlockBits(dat !  );
-            dat = null; 
-            cur = null;
-         
-          
-        }
+    public void Unlock()
+    { 
+        bmp.UnlockBits(dat !  );
+        dat = null; 
+        cur = null;
+    }
 
 
     public void Dispose()
     {
         if (dat != null) Unlock(); 
-        bmp.Dispose();
-
+        bmp.Dispose(); 
         bmp = null! ;  
     }
         public pixel* At(int x, int y) => (pixel*)(cur + y *  _width + x * sizeof(pixel));
