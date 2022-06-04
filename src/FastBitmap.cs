@@ -21,8 +21,8 @@ namespace Speedy_Bitmap;
         public Bitmap bmp { get; internal set; }   
 
 
-
-
+     
+     
         byte* cur;
         BitmapData?  dat;
 
