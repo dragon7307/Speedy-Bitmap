@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -6,6 +6,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <Version>1.0.0</Version>
+    <Authors>dragon-cs</Authors>
+    <Description>A more performent Bitmap than  Csharps built-in one.
+It is about 8 times as fast what is achieved  by  utilising unsafe code</Description>
+    <PackageTags>Bitmap,fast,efficient,performent,Performance,Graphics,GDI+,System.Drawing , Image</PackageTags>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>(MIT)</PackageLicenseExpression> 
+	  
+    <RepositoryUrl>https://github.com/dragon7307/Speedy-Bitmap</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/dragon7307/Speedy-Bitmap</PackageProjectUrl>
+    <Copyright> You are not allowed to redistribute or publish this package. Furthermore you are not allowed to claim it as your own.</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
