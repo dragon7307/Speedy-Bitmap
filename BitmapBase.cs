@@ -36,6 +36,7 @@ namespace Speedy_Bitmap
             Jpeg => System.Drawing.Imaging.ImageFormat.Jpeg,
             Jpg => System.Drawing.Imaging.ImageFormat.Jpeg,
             Gif => System.Drawing.Imaging.ImageFormat.Gif,
+
             _ => System.Drawing.Imaging.ImageFormat.Png,
         };
         public T* At(int x, int y) => (T*)(cur + y * width + x * sizeof(T));
